@@ -1,0 +1,42 @@
+<form [formRoot]="favoriteForm" (input)="saved.set(false)">
+  <div>
+    <label for="alias">Alias</label>
+    <br />
+    <input id="alias" type="text" [formField]="favoriteForm.alias" />
+    @let aliasError = errorMessage(favoriteForm.alias);
+    @if (aliasError) {
+      <p>{{ aliasError }}</p>
+    }
+  </div>
+
+  <div>
+    <label for="amount">Monto (USD)</label>
+    <br />
+    <input id="amount" type="text" inputmode="decimal" [formField]="favoriteForm.amount" />
+    @let amountError = errorMessage(favoriteForm.amount);
+    @if (amountError) {
+      <p>{{ amountError }}</p>
+    }
+  </div>
+
+  <div>
+    <label for="destinationAccount">Cuenta destino</label>
+    <br />
+    <input
+      id="destinationAccount"
+      type="text"
+      inputmode="numeric"
+      [formField]="favoriteForm.destinationAccount"
+    />
+    @let destinationAccountError = errorMessage(favoriteForm.destinationAccount);
+    @if (destinationAccountError) {
+      <p>{{ destinationAccountError }}</p>
+    }
+  </div>
+
+  <button type="submit" [disabled]="favoriteForm().invalid()">Guardar</button>
+
+  @if (saved()) {
+    <p>Transferencia guardada</p>
+  }
+</form>
